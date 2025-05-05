@@ -1,5 +1,6 @@
 import { getTile } from './grid.js';
 import { player } from './player.js';
+import { playDugSound } from './game.js';
 
 function getMiningProperties(type) {
   switch (type) {
