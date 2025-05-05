@@ -166,7 +166,7 @@ document.addEventListener("keydown", (e) => {
 
 /* MUSIC */
 // 🎵 Background Music
-const bgMusic = new Audio("assets/audio/theme.mp3");
+const bgMusic = new Audio("music/theme.mp3");
 bgMusic.loop = true;
 bgMusic.volume = 0.5; // You can adjust this
 
