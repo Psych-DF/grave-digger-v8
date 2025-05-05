@@ -293,3 +293,32 @@ background-color: lime;
 #day-end-screen button:hover {
   background: #3bb;
 }
+
+/* Day End Overlay Styles */
+#day-end-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.95);
+  color: #eee;
+  z-index: 1000;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-family: monospace;
+}
+
+#day-end-overlay.active {
+  display: flex;
+}
+
+.day-end-content button {
+  padding: 10px 20px;
+  font-size: 1rem;
+  background: #4dd;
+  border: none;
+  color: #000;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
