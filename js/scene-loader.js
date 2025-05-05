@@ -1,4 +1,4 @@
-// scene-loader.js
+/*
 import { initGame } from './game.js';
 
 let currentScene = "start-screen";
