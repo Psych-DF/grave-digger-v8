@@ -1,9 +1,10 @@
-// js/game.js
+/* IMPORTS */
 import { createGrid, gridWidth, gridHeight } from './grid.js';
 import { player } from './player.js';
 import { mineTile } from './mining.js';
 import { getTile } from './grid.js';
-
+import { loadScene } from './scene-loader.js';
+/* IMPORTS */
 
 let mineTimeout = null;
 
@@ -79,14 +80,10 @@ function movePlayer(key) {
   player.stepsLeft--;
   updateStepDisplay();
 
-  // ✅ If steps depleted, reset position and steps
+  // ✅ Triggers show day end logic upon steps +0
   if (player.stepsLeft <= 0) {
-    player.stepsLeft = player.maxSteps;
-    player.x = player.spawnX;
-    player.y = player.spawnY;
-    updatePlayerPosition();
-    centerCameraOnPlayer();
-    return;
+  showDayEndScreen();
+  return;
   }
 
   lastMoveTime = now;
@@ -142,3 +139,32 @@ export function updateStepDisplay() {
   if (el) el.textContent = player.stepsLeft;
 }
 
+/* NO STEPS SCENE LOADER LOGIC  */
+function showDayEndScreen() {
+  player.stepsLeft = player.maxSteps;
+  player.x = player.spawnX;
+  player.y = player.spawnY;
+  updatePlayerPosition();
+  centerCameraOnPlayer();
+
+  // Optional extras
+  // playSound("day_end");
+  // logEvent("day-ended");
+
+  loadScene("day-end-screen");
+}
+
+/* SHOW DAY END LOGIC*/
+function showDayEndScreen() {
+  player.stepsLeft = player.maxSteps;
+  player.x = player.spawnX;
+  player.y = player.spawnY;
+  updatePlayerPosition();
+  centerCameraOnPlayer();
+
+  // Optional extras
+  // playSound("day_end");
+  // logEvent("day-ended");
+
+  loadScene("day-end-screen");
+}
