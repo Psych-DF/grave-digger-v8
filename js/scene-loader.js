@@ -37,3 +37,4 @@ async function init() {
 }
 
 init();
+window.loadScene = loadScene;
