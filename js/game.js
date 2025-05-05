@@ -133,4 +133,8 @@ window.startNewDay = function () {
   updatePlayerPosition();
   centerCameraOnPlayer();
   updateStepDisplay();
-};
+}
+
+window.addEventListener("DOMContentLoaded", () => {
+  initGame(); // creates grid and centers camera
+});
