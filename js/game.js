@@ -78,6 +78,7 @@ function movePlayer(key) {
   player.y = newY;
   player.stepsLeft--;
   updateStepDisplay();
+  playMoveSound();
 
   if (player.stepsLeft <= 0) {
     showDayEndOverlay();
