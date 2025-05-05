@@ -152,4 +152,5 @@ function showDayEndScreen() {
   // logEvent("day-ended");
 
   loadScene("day-end-screen");
+  }
 
