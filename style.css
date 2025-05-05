@@ -255,3 +255,41 @@ background-color: lime;
   font-family: monospace;
   z-index: 2000; /* ensure it's above the game */
 }
+
+/* END OF DAY SCREEN SCENE STYLING*/
+
+#day-end-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: #111;
+  color: #eee;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: monospace;
+  z-index: 2000;
+}
+
+#day-end-screen h1 {
+  font-size: 2.5em;
+  margin-bottom: 20px;
+}
+
+#day-end-screen button {
+  background: #4dd;
+  color: #000;
+  border: none;
+  padding: 12px 24px;
+  font-size: 1em;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background 0.2s;
+}
+
+#day-end-screen button:hover {
+  background: #3bb;
+}
