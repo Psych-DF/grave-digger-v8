@@ -170,7 +170,7 @@ document.addEventListener("keydown", (e) => {
 /* MUSIC */
 // 🎵 Background Music
 function startMusic() {
-  const bgMusic = new Audio("assets/audio/theme.mp3");
+  const bgMusic = new Audio("music/theme.mp3");
   bgMusic.loop = true;
   bgMusic.volume = 0.5;
   bgMusic.play().catch(() => {
@@ -179,7 +179,7 @@ function startMusic() {
 }
 
 function playMoveSound() {
-  const moveSound = new Audio("assets/audio/move.wav");
+  const moveSound = new Audio("music/move.wav");
   moveSound.volume = 0.3; // optional
   moveSound.play();
 }
