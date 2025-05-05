@@ -1,4 +1,4 @@
-// scene-loader.js
+// scene-loader.js NEW SCENE LOADER //
 import { initGame } from './game.js';
 
 let currentScene = "start-screen";
@@ -11,10 +11,6 @@ export async function loadScene(sceneName) {
     document.getElementById("app").innerHTML = html;
     currentScene = sceneName;
     console.log(`Loaded scene: ${sceneName}`);
-
-    if (sceneName === "game-play-screen") {
-      initGame(); // 👈 Add this hook to start the game
-    }
   } catch (err) {
     console.error(err);
     document.getElementById("app").innerHTML = `<p style="color:red;">Failed to load scene: ${sceneName}</p>`;
@@ -25,6 +21,7 @@ async function handleKeyPress(e) {
   if (e.key === "Enter") {
     if (currentScene === "start-screen") {
       await loadScene("game-play-screen");
+      initGame(); // ✅ Only run here
     } else if (currentScene === "game-over-screen") {
       await loadScene("start-screen");
     }
