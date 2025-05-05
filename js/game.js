@@ -12,27 +12,28 @@ export function initGame() {
   const gameContainer = document.getElementById("game");
   const oreDisplay = document.getElementById("ore-count");
 
+  if (window.savedGridHTML) {
+    // We're resuming — don't reset stats or clear progress
+    gameContainer.innerHTML = window.savedGridHTML;
+  } else {
+    // Fresh game init
+    player.ore = 0;
+    gameContainer.innerHTML = "";
+    createGrid(gameContainer);
+  }
 
-
-
-  // Reset state
-  player.ore = 0;
-  oreDisplay.textContent = "0";
-  gameContainer.innerHTML = "";
-
-  createGrid(gameContainer);
+  oreDisplay.textContent = player.ore;
   updatePlayerPosition();
   centerCameraOnPlayer();
+  updateStepDisplay();
 
+  // Reattach controls
   document.addEventListener("keydown", handleKeyDown);
   document.addEventListener("keyup", handleKeyUp);
 }
 
 function updatePlayerPosition() {
-  // Remove old player marker
   document.querySelectorAll(".player").forEach((el) => el.classList.remove("player"));
-
-  // Add .player class to the tile the player is on
   const tile = document.querySelector(`.tile[data-x="${player.x}"][data-y="${player.y}"]`);
   if (tile) tile.classList.add("player");
 }
@@ -53,7 +54,7 @@ function centerCameraOnPlayer() {
 let moveInterval = null;
 let heldDirection = null;
 let lastMoveTime = 0;
-const moveCooldown = 200; // in milliseconds
+const moveCooldown = 200;
 
 function movePlayer(key) {
   const now = Date.now();
@@ -72,18 +73,16 @@ function movePlayer(key) {
   }
 
   const nextTile = getTile(newX, newY);
-  if (!nextTile || nextTile.dataset.type === "rock") return; // Block invalid move
+  if (!nextTile || nextTile.dataset.type === "rock") return;
 
-  // ✅ Valid move: now spend the step
   player.x = newX;
   player.y = newY;
   player.stepsLeft--;
   updateStepDisplay();
 
-  // ✅ Triggers show day end logic upon steps +0
   if (player.stepsLeft <= 0) {
-  showDayEndScreen();
-  return;
+    showDayEndScreen();
+    return;
   }
 
   lastMoveTime = now;
@@ -91,25 +90,18 @@ function movePlayer(key) {
   centerCameraOnPlayer();
 }
 
-
 /* PLAYER HOLD BUTTON MOVEMENT CONTROLS */
 
 function handleKeyDown(e) {
   const key = e.key.toLowerCase();
-
-  // Prevent stacking intervals or repeats
   if (e.repeat || moveInterval) return;
 
-  // Only react to movement keys
   if (["arrowup", "arrowdown", "arrowleft", "arrowright", "w", "a", "s", "d"].includes(key)) {
     heldDirection = key;
-    movePlayer(heldDirection); // 👈 move once immediately
-    moveInterval = setInterval(() => {
-      movePlayer(heldDirection);
-    }, 250); // then continue stepping
+    movePlayer(heldDirection);
+    moveInterval = setInterval(() => movePlayer(heldDirection), 250);
   }
 
-  // Mining still works
   if (key === " ") {
     if (!mineTimeout) {
       mineTimeout = setTimeout(() => {
@@ -133,24 +125,21 @@ function handleKeyUp(e) {
   }
 }
 
-// ✅ Exported globally — outside all functions
 export function updateStepDisplay() {
   const el = document.getElementById("step-count");
   if (el) el.textContent = player.stepsLeft;
 }
 
-/* NO STEPS SCENE LOADER LOGIC  */
+/* DAY END TRANSITION */
 function showDayEndScreen() {
+  const gameEl = document.getElementById("game");
+  if (gameEl) window.savedGridHTML = gameEl.innerHTML;
+
   player.stepsLeft = player.maxSteps;
   player.x = player.spawnX;
   player.y = player.spawnY;
   updatePlayerPosition();
   centerCameraOnPlayer();
 
-  // Optional extras
-  // playSound("day_end");
-  // logEvent("day-ended");
-
   loadScene("day-end-screen");
-  }
-
+}
