@@ -238,22 +238,28 @@ background-color: lime;
 }
 
 
-/* START SCREEN STYLING */
-
-#start-screen {
+/* Overlay Styles */
+.overlay {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: #111;
-  color: #eee;
-  display: flex;
+  inset: 0;
+  background: #000;
+  color: #0f0;
+  z-index: 2000;
+  display: none;
+  justify-content: center;
+  align-items: center;
   flex-direction: column;
-  justify-content: center; /* vertical center */
-  align-items: center;     /* horizontal center */
   font-family: monospace;
-  z-index: 2000; /* ensure it's above the game */
+  text-align: center;
+}
+
+.overlay.active {
+  display: flex;
+}
+
+.overlay-content h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
 }
 
 /* END OF DAY SCREEN SCENE STYLING*/
