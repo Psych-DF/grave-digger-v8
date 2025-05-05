@@ -42,6 +42,8 @@ export function mineTile(x, y) {
       }
 
       player.digs++; // ✅ DIG INCREMENT
+      const digsDisplay = document.getElementById("digs-count");
+      if (digsDisplay) digsDisplay.textContent = player.digs;
 
       console.log(`Mined ${type}. +${reward} ${type}`);
     }, time);
