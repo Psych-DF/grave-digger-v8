@@ -162,3 +162,17 @@ document.addEventListener("keydown", (e) => {
     }
   }
 });
+
+/* MUSIC */
+// 🎵 Background Music
+const bgMusic = new Audio("assets/audio/theme.mp3");
+bgMusic.loop = true;
+bgMusic.volume = 0.5; // You can adjust this
+
+function startMusic() {
+  if (bgMusic.paused) {
+    bgMusic.play().catch(() => {
+      // User hasn't interacted yet
+    });
+  }
+}
