@@ -51,11 +51,24 @@ function movePlayer(key) {
   let newY = player.y;
 
   switch (key) {
-    case "arrowup": case "w": newY--; break;
-    case "arrowdown": case "s": newY++; break;
-    case "arrowleft": case "a": newX--; break;
-    case "arrowright": case "d": newX++; break;
-    default: return;
+    case "arrowup":
+    case "w":
+      newY--;
+      break;
+    case "arrowdown":
+    case "s":
+      newY++;
+      break;
+    case "arrowleft":
+    case "a":
+      newX--;
+      break;
+    case "arrowright":
+    case "d":
+      newX++;
+      break;
+    default:
+      return;
   }
 
   const nextTile = getTile(newX, newY);
@@ -135,10 +148,12 @@ window.startNewDay = function () {
   updateStepDisplay();
 };
 
+// 🎮 Start game on page load
 window.addEventListener("DOMContentLoaded", () => {
-  initGame(); // creates grid and centers camera
+  initGame();
 });
 
+// ⌨️ Reveal start screen on Enter
 document.addEventListener("keydown", (e) => {
   if (e.key === "Enter") {
     const startOverlay = document.getElementById("start-screen-overlay");
