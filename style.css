@@ -31,8 +31,8 @@ body {
 /* GRID */
 #game {
   display: grid;
-  grid-template-columns: repeat(500, 24px);
-  grid-template-rows: repeat(500, 24px);
+  grid-template-columns: repeat(500, 32px);
+  grid-template-rows: repeat(500, 32px);
   gap: 2px;
   /* REMOVE these two lines 👇 */
   /* margin: 0 auto;
@@ -41,8 +41,8 @@ body {
 }
 /* TILES */
 .tile {
-  width: 24px;
-  height: 24px;
+  width: 32px;
+  height: 32px;
   position: relative;
   background: #444;
   z-index: 0;
