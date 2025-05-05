@@ -1,5 +1,6 @@
 // js/grid.js
 import { getRandomTileType } from './tileTypes.js';
+import { mineTile } from './mining.js';
 
 export const grid = [];
 export const gridWidth = 500;
@@ -33,4 +34,14 @@ export function getTile(x, y) {
   if (x < 0 || x >= gridWidth || y < 0 || y >= gridHeight) return null;
   const index = y * gridWidth + x;
   return grid[index] || null;
+}
+
+export function rebindGridEvents() {
+  document.querySelectorAll(".tile").forEach(tile => {
+    tile.addEventListener("click", () => {
+      const x = parseInt(tile.dataset.x, 10);
+      const y = parseInt(tile.dataset.y, 10);
+      mineTile(x, y);
+    });
+  });
 }
