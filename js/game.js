@@ -170,16 +170,19 @@ document.addEventListener("keydown", (e) => {
 /* MUSIC */
 // 🎵 Background Music
 function startMusic() {
-  const bgMusic = new Audio("music/theme.mp3");
-  bgMusic.loop = true;
-  bgMusic.volume = 0.5;
-  bgMusic.play().catch(() => {
-    console.log("User interaction required to start music");
-  });
+  const moveSound = new Audio("music/theme.mp3");
+  moveSound.volume = 0.3; // optional
+  moveSound.play();
 }
 
 function playMoveSound() {
   const moveSound = new Audio("music/move.wav");
+  moveSound.volume = 0.3; // optional
+  moveSound.play();
+}
+
+function playDugSound() {
+  const moveSound = new Audio("music/dug.wav");
   moveSound.volume = 0.3; // optional
   moveSound.play();
 }
