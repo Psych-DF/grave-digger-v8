@@ -159,6 +159,7 @@ document.addEventListener("keydown", (e) => {
     const startOverlay = document.getElementById("start-screen-overlay");
     if (startOverlay && startOverlay.classList.contains("active")) {
       startOverlay.classList.remove("active");
+      startMusic();
     }
   }
 });
