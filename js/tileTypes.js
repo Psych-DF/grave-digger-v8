@@ -1,3 +1,4 @@
+/* LOGIC FILE FOR HOW TILES SPAWN INTO THE GRID */
 export function getRandomTileType() {
   const rand = Math.random();
 
