@@ -152,19 +152,4 @@ function showDayEndScreen() {
   // logEvent("day-ended");
 
   loadScene("day-end-screen");
-}
 
-/* SHOW DAY END LOGIC*/
-function showDayEndScreen() {
-  player.stepsLeft = player.maxSteps;
-  player.x = player.spawnX;
-  player.y = player.spawnY;
-  updatePlayerPosition();
-  centerCameraOnPlayer();
-
-  // Optional extras
-  // playSound("day_end");
-  // logEvent("day-ended");
-
-  loadScene("day-end-screen");
-}
