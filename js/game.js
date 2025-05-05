@@ -1,10 +1,6 @@
-/* IMPORTS */
-import { createGrid, gridWidth, gridHeight } from './grid.js';
+import { createGrid, getTile } from './grid.js';
 import { player } from './player.js';
 import { mineTile } from './mining.js';
-import { getTile } from './grid.js';
-import { loadScene } from './scene-loader.js';
-/* IMPORTS */
 
 let mineTimeout = null;
 
@@ -12,22 +8,14 @@ export function initGame() {
   const gameContainer = document.getElementById("game");
   const oreDisplay = document.getElementById("ore-count");
 
-  if (window.savedGridHTML) {
-    // We're resuming — don't reset stats or clear progress
-    gameContainer.innerHTML = window.savedGridHTML;
-  } else {
-    // Fresh game init
-    player.ore = 0;
-    gameContainer.innerHTML = "";
-    createGrid(gameContainer);
-  }
+  gameContainer.innerHTML = "";
+  createGrid(gameContainer);
 
   oreDisplay.textContent = player.ore;
   updatePlayerPosition();
   centerCameraOnPlayer();
   updateStepDisplay();
 
-  // Reattach controls
   document.addEventListener("keydown", handleKeyDown);
   document.addEventListener("keyup", handleKeyUp);
 }
@@ -48,8 +36,6 @@ function centerCameraOnPlayer() {
     });
   }
 }
-
-/* PLAYER MOVEMENT CONTROLS */
 
 let moveInterval = null;
 let heldDirection = null;
@@ -81,7 +67,7 @@ function movePlayer(key) {
   updateStepDisplay();
 
   if (player.stepsLeft <= 0) {
-    showDayEndScreen();
+    showDayEndOverlay();
     return;
   }
 
@@ -89,8 +75,6 @@ function movePlayer(key) {
   updatePlayerPosition();
   centerCameraOnPlayer();
 }
-
-/* PLAYER HOLD BUTTON MOVEMENT CONTROLS */
 
 function handleKeyDown(e) {
   const key = e.key.toLowerCase();
@@ -130,16 +114,23 @@ export function updateStepDisplay() {
   if (el) el.textContent = player.stepsLeft;
 }
 
-/* DAY END TRANSITION */
-function showDayEndScreen() {
-  const gameEl = document.getElementById("game");
-  if (gameEl) window.savedGridHTML = gameEl.innerHTML;
+function showDayEndOverlay() {
+  const overlay = document.getElementById("day-end-overlay");
+  if (overlay) {
+    document.getElementById("stat-digs").textContent = player.digs || 0;
+    overlay.classList.add("active");
+  }
+}
+
+window.startNewDay = function () {
+  const overlay = document.getElementById("day-end-overlay");
+  if (overlay) overlay.classList.remove("active");
 
   player.stepsLeft = player.maxSteps;
   player.x = player.spawnX;
   player.y = player.spawnY;
+
   updatePlayerPosition();
   centerCameraOnPlayer();
-
-  loadScene("day-end-screen");
-}
+  updateStepDisplay();
+};
