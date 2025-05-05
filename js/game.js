@@ -164,6 +164,8 @@ document.addEventListener("keydown", (e) => {
   }
 });
 
+/*  SFX */
+
 /* MUSIC */
 // 🎵 Background Music
 function startMusic() {
@@ -173,4 +175,10 @@ function startMusic() {
   bgMusic.play().catch(() => {
     console.log("User interaction required to start music");
   });
+}
+
+function playMoveSound() {
+  const moveSound = new Audio("assets/audio/move.wav");
+  moveSound.volume = 0.3; // optional
+  moveSound.play();
 }
